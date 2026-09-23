@@ -1,0 +1,20 @@
+{
+  "01_crossing_phase.png": "51c732abb932cd1197afadd29dc57324c32055f7c6dc3aaff57e2ea874be35ba",
+  "01_crossing_phase.svg": "349bfa787dabb596940986c5bcf7cd1b31436cd25c2c00b8dce9aa41799a51e8",
+  "02_integer_interval_probabilities.png": "b777a584975e69bc8a554c1381e5bf086ac999096c154cfe9cbf05bc24ad3d47",
+  "02_integer_interval_probabilities.svg": "adec6df1f4bc1268b7852458b7de15c88625761d8795cf0e4cb4e5df5cca981d",
+  "03_linear_control.png": "459a721923218973e04275422d16128cf3c032ff398cf91cdd81e649437c5767",
+  "03_linear_control.svg": "6b061b13d6616b002b44e38494a9eab9a2ee41135d4b0d0a2d6d3a52abdcbd74",
+  "04_relative_phase_drift.png": "a022426dde6757114aabe9b82f305ce10ddf44f71157485967e2079127588e8c",
+  "04_relative_phase_drift.svg": "d6f38c6ad0cbd34b4b6f3a5ec55ebf731770d1543c9d15ba21ddabb1721eb916",
+  "05_interval_distributions.png": "e3b414b7839fcbe18ff6a80e9ce8ff89c6e06129046e285a0ba1558052607542",
+  "05_interval_distributions.svg": "674ce3dd0b39450749609a3267d9ebf75abf8196f4e3abdea1f3248417fcac3b",
+  "branch_slopes.csv": "cad255be77ec871c38bb60ad911fab1612521262ff1ae5cf7bc12ebe3d3789bb",
+  "captions.md": "3997303aa537f651da8772b5b225daae4a85f4157fde5d7133a8800e36e9adf4",
+  "conclusion_summary.png": "1ef730ce9c9774a52de2cdd2de801f64e9634081ca89683e0a6905f39df820c8",
+  "conclusion_summary.svg": "d8643ca3926a03d8e85c29fe94ef1fa0bfb1bebf8a76b949ab7be51b55b77d0a",
+  "crossing_phase_density.csv": "022103aae882affedd3db8a843e1f6a12a678afa50cdcd55df89ee259560eac0",
+  "interval_band_probabilities.csv": "5474af345966a9ec0696c0a8aa4e06c469c3aadc15ac6859696a28329da883a6",
+  "interval_density.csv": "313490df5921d012a67928ab82278aeaf1ee6fda6aafd8549a0b81210cb11867",
+  "relative_phase_drift.csv": "b7215f4a6cbca5c2f1d4dfc7ee4763d6022c6cda4030c3039e10bd8fa8f563af"
+}

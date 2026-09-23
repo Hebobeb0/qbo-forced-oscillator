@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.dll
+*.so
+*.dylib
+work/fontcache/
+.venv/
+.env
+.env.*
+!.env.example

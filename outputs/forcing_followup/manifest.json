@@ -1,0 +1,58 @@
+{
+  "model": "dX=V dt; dV=-(X+epsilon V)dt + sqrt(epsilon*(sigma^2+2*r*X^2))dB + delta*sin(omega*t)dt",
+  "epsilon": 0.05,
+  "sigma": 1,
+  "dt": 0.0025,
+  "T": 4000,
+  "burn": 1000,
+  "grid_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108
+  ],
+  "focal_seeds": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+  ],
+  "grid_runs": 2976,
+  "focal_runs": 96,
+  "raw_crossings": 1930310,
+  "parameters_columns": [
+    "r",
+    "delta",
+    "omega",
+    "seed"
+  ],
+  "statistics_columns": [
+    "rms_X",
+    "residual_variance",
+    "mean_V2",
+    "mean_geometric_phase_rate",
+    "Q1",
+    "Q2",
+    "Q3",
+    "mean_X2"
+  ],
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "pillow": "12.3.0"
+  },
+  "source_sha256": {
+    "forcing.c": "dc48f996c9ad543e0d361201fee9f4ef1cdbc9bdb5065e6ca0e323fc584ef218",
+    "run_experiments.py": "a87574e2108af745009413325a2412c06d491f350b748c44292ae486ee38f15b",
+    "analyse_experiments.py": "3237e1cfcfa3e8c475ec0e759024298dbfbc847f572261df603cc131f7b60e0d"
+  }
+}

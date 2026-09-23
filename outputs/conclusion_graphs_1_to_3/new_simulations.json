@@ -1,0 +1,31 @@
+{
+  "delta": 2.5,
+  "grid_runs": 496,
+  "focal_runs": 16,
+  "grid_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108
+  ],
+  "focal_seeds": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+  ],
+  "dt": 0.0025,
+  "T": 4000,
+  "burn": 1000,
+  "epsilon": 0.05,
+  "sigma": 1,
+  "maximum_superposition_event_error": 5.4569682106375694e-12
+}

@@ -1,0 +1,1305 @@
+
+--- PAGE 1 ---
+Additive forcing of a random-frequency oscillator:
+a catalogue of simulations, measurements and figures
+Abstract
+This document is an inventory. It lists every simulation run on the additively forced random-frequency
+oscillator, the parameter grid each one covered, the quantities measured, and every figure produced,
+together with an explicit guide to what is plotted on each axis and what each line, colour and marker
+represents. Numbers quoted in the text are the measured values. No interpretation, verdict or conclusion is
+offered anywhere in this document; the figures and the numbers are presented as they came out. Parametric
+forcing is excluded except where a parametric run was used purely to calibrate a detector, which is stated
+explicitly at that point.
+Contents
+1 The model, the observables and the numerical method 1
+1.1 Equations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.2 Integrator . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.3 The observables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2 Validation of the integrator 3
+3 The blanket sweep of the reduced system 3
+3.1 Where the response sits in frequency . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+3.2 Frequency-tracking tests . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+3.3 Trajectories and distributions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4 The full three-dimensional system 10
+5 Calibration of the detector 10
+6 Cycle length under the phase-winding definition 11
+7 Cycle length under the zero-crossing definitions 15
+7.1 The two counting rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+7.2 The fine sweep . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+7.3 Occupancy of the integer bands . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+7.4 Shape of the distribution at a fixed frequency . . . . . . . . . . . . . . . . . . . . . . . . . 19
+7.5 Sensitivity of the branch to the drive . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+8 Index of simulations 22
+9 Index of figures 22
+10 Index of measured values 23
+1 The model, the observables and the numerical method
+1.1 Equations
+Everything below is run on one of two systems.
+1
+--- PAGE 2 ---
+The reduced two-dimensional system. In polar-like coordinates (h, ϕ), where h is an energy-like amplitude
+variable and ϕ a phase, the additively forced oscillator is integrated as
+¨X + ε ˙X + X = δ sin(ωt) +(random-frequency term), (1)
+with the random-frequency term reduced, in the white-noise limit, to a state-dependent diffusion of strength
+governed by σ and by the exponent parameter r. The stationary density of h in the unforced case is known in
+closed form,
+ps(h) = C (σ 2 + rh)−2/r, C = (2 − r)(σ 2)2/r−1, (2)
+normalisable for r < 2 and of finite mean for r < 1.
+The full three-dimensional system. Before the reduction, the frequency itself is an Ornstein–Uhlenbeck
+process At with correlation time τ, and the stiffness in (1) is A2
+t . The reduced system is the τ → 0 limit. This
+system is used in §4.
+Parameters.
+ε damping
+σ noise amplitude of the random-frequency term
+r multiplicative-noise exponent; r = 0 makes the system exactly linear
+δ forcing amplitude
+ω forcing frequency
+τ correlation time of At (three-dimensional system only)
+The natural frequency is ω0 = 1 throughout, so the free period is 2π ≈ 6.283 and the drive period is
+Tdrive = 2π/ω.
+1.2 Integrator
+A symplectic (semi-implicit) Euler–Maruyama scheme is used, implemented in C and called through ctypes ;
+the random number generator is xoshiro256++ . Forward Euler–Maruyama was rejected because it inflates
+the energy by a factor (1 + ∆t2) per step; the Milstein correction vanishes for this system, so the scheme is of
+strong order 1. When h exceeds 1012 the state is rescaled by 10−6 and the discarded factor is accumulated
+in logh, so growth rates remain measurable without overflow. Common random numbers are used across a
+sweep: at fixed seed, every (δ , ω) cell sees the same noise realisation, so differences between cells are not
+seed noise.
+Standard settings unless a section says otherwise: ∆t = 0.0025, output thinned by 80 (sample interval
+0.2), and a burn-in that is discarded before any statistic is computed.
+1.3 The observables
+Spectral peak of X. The largest local maximum of the periodogram of X. A “sub-drive” variant excludes
+frequency bands within ±3% of the first four drive harmonics mω, m = 1, . . . ,4, so that the free
+oscillation can be tracked even when the drive line dominates.
+Tracking slope. d(response frequency)/dω, fitted by least squares over a fixed window ofω ([1.8,2.2] for
+the 2:1 window, [2.8,3.2] for the 3:1 window). A response that follows the drive at half its frequency
+gives slope 1
+2; one that ignores the drive gives slope 0.
+Phase coherence. Rn =
+⟨expi(ϕ − ωt/n)⟩
+ for n = 1,2,3, averaged over the run. Because the reference
+term depends on ω, the chance level does too, and nulls are matched on |ω/n − 1| rather than pooled.
+Cycle period, phase-winding definition. The times at which the unwrapped phase ϕ advances by 2π; suc-
+cessive differences are the cycle periods.
+2
+--- PAGE 3 ---
+Cycle period, zero-crossing definitions. The times at which X crosses zero upward, found by linear inter-
+polation between samples. Two counting rules are used and are compared in §7: raw, which accepts
+every upward crossing, and hysteresis (a Schmitt trigger), which accepts an upward crossing only if X
+has been below −hth since the previous accepted one, with hth = 0.25rms (X).
+N, cycle length in drive periods. N = Tcycle/Tdrive = Tcycle ω/2π. In the unforced system Tcycle = 2π exactly,
+so N = ω.
+Growth rate. The least-squares slope of logh(t) against t, halved.
+Sarle bimodality coefficient. b = (g2
+1 +1)/g2 from the skewnessg1 and kurtosis g2 of the period distribution;
+b = 5/9 for a uniform distribution.
+Band powers of h(t). Fraction of the power of h(t) falling in narrow bands centred on ω/3, ω/2, ω and 2ω.
+2 Validation of the integrator
+Simulation V1. Unforced reduced system, ε = 0.05, σ = 1, r = 0.5, T = 20000, burn-in 2000, single seed.
+Also, three short forced runs at ω = 2.5 with δ ∈ {0,4,30}, T = 600.
+Measured. The simulated stationary density of h against the closed form (2); the distribution of the phase-
+winding cycle period against the free value 2π; and three sample trajectories. Separately, the portable NumPy
+version of the integrator was checked against scipy.integrate.solve_ivp on the deterministic skeleton:
+growth rates agree to ∼ 10−5.
+0 5 10
+h
+10 4
+10 3
+10 2
+10 1
+100
+ps(h)
+(a)
+simulation
+exact
+4 6 8 10
+cycle period
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7density
+(b)
+measured
+2
+400 410 420 430 440
+t
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+X/max|X|
+(c)
+= 0
+ = 4
+ = 30
+F01 — integrator validation. (a) Stationary density of the energy variable h. Horizontal axis h, vertical axis ps(h)
+on a logarithmic scale. Blue step curve: histogram from the simulation. Black dashed curve: the closed form (2). (b)
+Distribution of the cycle period measured from phase winding in the unforced system. Horizontal axis: cycle period;
+vertical axis: probability density. Red dashed vertical line: 2π, the free period. (c) Three trajectories over t ∈ [400,440]
+at ω = 2.5, each divided by its own peak|X| so that the shapes can be compared: grey δ = 0, blue δ = 4, orange δ = 30.
+3 The blanket sweep of the reduced system
+Simulation S1 — the main additive sweep. The grid is
+ω 0.500, 0.525, . . . , 4.000 (141 values, step 0.025)
+δ 0, 0.5, 1.5, 4, 12, 30 (6 values; δ = 0 is the in-grid null)
+r 0, 0.25, 0.5, 0.9, 1.4 (5 values; r = 0 is exactly linear)
+σ 0.5, 1, 2
+ε 0.02, 0.05, 0.1, 0.2
+seed 11 , 22, 33, 44
+3
+--- PAGE 4 ---
+with T = 3000, ∆t = 0.0025, burn-in 1000, sample interval 0.2. This is 203,040 runs in total, of which 33,840
+have δ = 0 and form the null. Grouping by (ε, σ ,r, δ ,seed) gives 1,440 parameter cells, each a full curve
+in ω; 1,200 of these have δ > 0. Every run stores the three largest global spectral peaks, the two largest
+sub-drive peaks, R1,R2,R3, the four band powers of h, the number of cycles, the mean, standard deviation,
+skewness, kurtosis and bimodality coefficient of the period distribution, the 19 vigintile quantiles of that
+distribution, and h statistics with the growth rate. Output: sweep_all.csv . No verdict is stored in the file.
+3.1 Where the response sits in frequency
+1 2 3 4
+0
+1
+2
+3response frequency
+= 0
+1 2 3 4
+= 1.5
+1 2 3 4
+= 4
+1 2 3 4
+= 30
+F02 — response spectrum against forcing frequency, four forcing strengths. Each panel is a two-dimensional map.
+Horizontal axis: forcing frequency ω, swept 0.45 to 4.00 in steps of 0.05. Vertical axis: response frequency, 0 to 3.
+Colour: log10 of the normalised spectral power of X at that response frequency, on a common scale from 10−3.4 (pale)
+to 1 (dark). Each vertical stripe of colour is therefore one run’s spectrum, stood on end. The overlaid guides mark where
+features would fall: red dashed = ω (the drive itself), orange dashed = ω/2, green dotted = ω/3, white dotted = ω0 = 1
+(the free frequency). Panels left to right: δ = 0, 1.5, 4, 30. Settings ε = 0.05, σ = 1, r = 0.5, T = 4000, burn-in 1500.
+4
+--- PAGE 5 ---
+F03 — the same map over a 5 ×5 grid of (δ ,r). Rows are forcing strength δ ∈ {0.5,1.5,4,12,30} from top to bottom;
+columns are the noise exponent r ∈ {0,0.25,0.5,0.9,1.4} from left to right. Each panel is read exactly as a panel of F02:
+horizontal axis ω from 0.45 to 4.00, vertical axis response frequency from 0 to 3, colour log10 power on a common
+scale. The guides are the same: red ω, orange ω/2, green ω/3, white ω0 = 1. The leftmost column, r = 0, is the exactly
+linear control. Settings ε = 0.05, σ = 1, T = 4000, burn-in 1500.
+5
+--- PAGE 6 ---
+F06 — individual Welch spectra. A 6 × 6 grid of single runs. Rows: δ ∈ {0,0.5,1.5,4,12,30}. Columns: ω ∈
+{1,1.5,1.8,2,2.4,3}. In every panel the horizontal axis is response frequency, 0 to 4.6, and the vertical axis is Welch
+power, normalised to the largest peak lying outside the drive band (0.97ω,1.03ω) so that features other than the drive
+remain visible on a linear scale. Blue curve with shading: the spectrum. Open circles with labels: automatically detected
+peaks, annotated with their frequency to two decimals; peaks taller than 1.25 on the normalised scale are left unlabelled
+and instead the drive is annotated with the factor by which it exceeds the frame (“drive ×n”). Vertical dashed lines: red
+ω, orange ω/2, green ω/3, grey ω0 = 1. Settings ε = 0.05, σ = 1, r = 0.5, T = 24000, burn-in 4000.
+6
+--- PAGE 7 ---
+3.2 Frequency-tracking tests
+1 2 3 4
+0.0
+0.5
+1.0
+1.5
+2.0response frequency
+(a)
+= 0
+= 1.5
+= 4
+= 30
+/2
+/3
+0.25
+ 0.00 0.25 0.50
+d(response)/d
+0
+200
+400
+600
+800
+1000parameter cells
+(b)
+permutation null
+forced, 2:1 window
+forced, 3:1 window
+1/2 (2:1 lock)
+1/3 (3:1 lock)
+0.0 0.5 1.0 1.5 2.0
+total travel of the peak
+0
+100
+200
+300
+400
+500parameter cells
+(c)
+measured
+2:1 lock would give
+F04 — tracking-slope statistics over the whole sweep. (a) Median response frequency against ω, one curve per
+forcing strength: grey δ = 0, green δ = 1.5, blue δ = 4, orange δ = 30. The two reference lines are the loci a response
+would follow if it moved with the drive: black dashed ω/2, red dotted ω/3. (b) Histogram of the tracking slope, one
+count per parameter cell. Blue: the 1,200 forced cells fitted over ω ∈ [1.8,2.2]. Orange: the same cells fitted over
+ω ∈ [2.8,3.2]. Grey: the permutation null, obtained by randomly permuting the response values within each cell before
+fitting, which destroys any relation to ω while preserving the marginal spread. Vertical lines mark the values a 2:1
+response ( 1
+2, black dashed) and a 3:1 response (1
+3, red dotted) would produce. (c) Histogram of the total travel of the
+peak, max −min of the response frequency across the full ω range within a cell. The black dashed line at 1.75 is the
+travel a response following ω/2 across this range would show.
+Measured: mean slope in the 2:1 window +0.0023, maximum +0.2017; mean slope in the 3:1 window −0.0005,
+maximum +0.1084; 0 of 1,200 cells reach half the 2:1 or 3:1 value. Median total travel 0.069, maximum 0.324.
+1 2 3 4
+10 1
+100
+101
+102
+amplitude at 
+(a)
+= 1.5
+linear response
+= 4
+= 30
+0.0 0.5 1.0
+r
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5largest tracking slope
+(b)
+= 0.5
+= 1.5
+= 4
+= 12
+= 30
+2:1 lock
+0 0.5 1.5 4 12 30
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+fraction of the power of h(t)
+(c)
+/3
+/2
+2
+F05 — amplitude response, dependence on r, and the spectrum of h. (a) Amplitude of the component of X at exactly
+the drive frequency, extracted by projecting onto sin ωt and cos ωt. Horizontal axis ω, vertical axis amplitude on a
+logarithmic scale. Solid curves: measured, green δ = 1.5, blue δ = 4, orange δ = 30. Black dashed: the linear-response
+formula A(ω) = δ /
+p
+(1 − ω2)2 + ε2ω2. These runs set r = 0. (b) The largest tracking slope found anywhere in the
+sweep, as a function of r. Horizontal axis r; vertical axis the maximum over cells of the slope fitted on ω ∈ [1.8,2.2].
+One curve per forcing strength. Black dashed line at 1
+2: the 2:1 value. (c) Fraction of the total power of h(t) in narrow
+bands, against δ (categorical axis). Green ω/3, orange ω/2, red ω, blue 2ω.
+Measured maximum tracking slope by r: 4.9 × 10−16 at r = 0; 0.1096 at r = 0.25; 0.0979 at r = 0.5; 0.2017 at r = 0.9;
+0.0520 at r = 1.4. Power of h at 2ω: 0.25% at δ = 0, rising to 31.7% at δ = 30.
+7
+--- PAGE 8 ---
+3.3 Trajectories and distributions
+F07 — sample paths at ω = 2.5. Four rows, one per forcing strength: δ = 0 (unforced), 1.5, 4, 30. Left column: X(t)
+over t ∈ [400,460], blue, each panel divided by its own peak |X| so the four rows are directly comparable in shape; the
+peak value before rescaling is printed in the panel title. The red curve is the drive sin(ωt) at fixed amplitude 0.55, drawn
+as a phase reference, not to scale. Right column: the energy h(t) over the whole run on a logarithmic vertical axis,
+orange; the median of h is printed in the panel title. Reference periods for this ω: drive 2π/ω = 1.257, twice the drive
+4π/ω = 2.513, free period 2π ≈ 6.283. Settings ε = 0.05, σ = 1, r = 0.5, T = 900, sample interval 0.05.
+8
+--- PAGE 9 ---
+F08 — distributions. (a) Stationary density of h at ω = 2.5 for δ ∈ {0,1.5,4,12} (coloured steps) with the closed form
+(2) as a black dashed curve. Horizontal axis h from 0 to 25; vertical axis density, logarithmic. (b) log10 h(t) over the
+first 400 time units, one curve per δ. (c) Histogram of the growth rate of logh over all 203,040 runs, split into δ = 0
+(grey) and δ > 0 (blue); vertical axis is a count on a logarithmic scale, black dashed line at zero. (d) Cycle-period
+distributions at ω = 2.5 from the phase-winding definition, for δ = 0 (grey), 4 (blue), 30 (orange), pooled over 8
+realisations, T = 6000, burn-in 1500. Three reference periods are marked and labelled in the panel: green2π/ω = 2.513
+the drive period, red 4π/ω = 5.027, black dotted 2π the free period. (e) Histogram of the relative distance of each run’s
+median period from 4π/ω, that is |q50 − 4π/ω|/(4π/ω); grey δ = 0, blue δ > 0; vertical axis a count on a logarithmic
+scale. (f) Histogram of the Sarle bimodality coefficient of the period distribution; grey δ = 0, green δ > 0 with r = 0
+(exactly linear), blue δ > 0 with r > 0. Red dashed line at 5/9, the uniform-distribution value.
+Measured: 1.16% of forced runs fall within 1% of 4π/ω, against 1.16% of the δ = 0 null. Bimodality coefficient above
+5/9 in 44.5% of forced runs, 31.3% of forced runs at r = 0, and 1.25% of null runs.
+F09 — phase coherence. (a) Map of the 2:1 coherence R2 = |⟨expi(ϕ − ωt/2)⟩|. Horizontal axis ω; vertical axis
+forcing strength δ as a categorical axis with the six sweep values as ticks; colour R2 on a fixed scale from 0 to 1. Slice
+shown: ε = 0.05, σ = 1, r = 0.5, averaged over seeds. (b) Densities of R2 for the 33,840 unforced runs (grey) and the
+169,200 forced runs (blue); vertical axis logarithmic. The black dashed vertical line is the single largest R2 observed
+anywhere in the null. The panel title reports the fraction of forced runs exceeding their ω-matched null, that is the
+null maximum taken among runs with the same |ω/n − 1|, rather than the pooled maximum. (c) Coherence against δ
+(categorical axis): solid lines the median, dashed lines the 99th percentile, for R1 (green), R2 (blue), R3 (orange).
+Measured: largest null R2 = 0.3574; median R2 is 0.0092 for forced runs against 0.0142 for the null; 0.47% of forced
+runs exceed their ω-matched null in R2 and 0.74% in R3.
+9
+--- PAGE 10 ---
+4 The full three-dimensional system
+Simulation S2 — three-dimensional scan (figure). ε = 0.2, σ = 1; τ ∈ {0.05,0.2,0.5,1,2,5}; δ ∈
+{0,4,30}; ω from 0.5 to 4.0 in steps of 0.05 (71 values); T = 6000, burn-in 2000. Here ε = 0.2 is used rather
+than 0.05 because it keeps the random frequency’s own parametric instability weak enough that the growth
+rate stays measurable.
+Simulation S3 — three-dimensional scan (tabulated). ε ∈ { 0.2,0.5}, τ ∈ { 0.5,1,2,5}, δ ∈
+{0,1,4,12,30}, ω from 1.0 to 4.0 in steps of 0.05 (61 values), seeds {11,22,33,44}: 9,760 runs,
+stored in scan3d_full.csv with the sub-drive peak, R2 and R3 for each.
+F10 — the full three-dimensional system under additive forcing. Columns are values of the correlation time τ,
+increasing left to right: 0.05, 0.2, 0.5, 1, 2, 5. All three rows share the horizontal axis, forcing frequency ω from 0.5 to
+4.0. In every panel the three curves are grey δ = 0, blue δ = 4, orange δ = 30. Top row: the free-oscillation spectral
+peak of X, computed with the four drive harmonics excised, vertical axis 0 to 2.3; the black dashed guide is ω/2 and
+the red dotted guide is ω/3. Middle row: 2:1 coherence R2, vertical axis 0 to 1. Bottom row: growth rate λ of logh,
+vertical axis −0.02 to 0.06, with a light line at zero.
+Measured at δ = 30, slope of the free peak over ω ∈ [1.8,2.2]: +0.005, +0.023, −0.001, −0.030, +0.144, −0.173
+for τ = 0.05, . . . ,5; the mean R2 over ω ∈ (1.6,2.6) is 0.009 to 0.032 across the same range of τ.
+5 Calibration of the detector
+Simulation S4. The identical measurement pipeline — same integrator, same run length T = 6000 and
+burn-in 2000, same sub-drive peak finder, same fixed-window regression onω ∈ [1.8,2.2], same coherence
+estimator — is applied to two forcings at ε = 0.05, σ = 1, r = 0.5, ω from 0.5 to 4.0 in steps of 0.05: additive
+at δ ∈ {0,4,30} and, purely as a calibration reference, parametric at δ ∈ {0,1,4}. This is the only place in
+this document where a parametric run appears, and it appears only to establish what the detector does when
+the response does follow the drive.
+10
+--- PAGE 11 ---
+F10b — detector calibration. (a) Additive forcing. Horizontal axis ω; vertical axis the sub-drive response frequency, 0
+to 2.3. One curve per δ, with its fitted tracking slope printed in the legend. The black dashed guide is ω/2; the grey
+dotted horizontal line is ω0 = 1. (b) The same axes and the same estimator applied to parametric forcing, included as the
+calibration reference. (c) 2:1 coherence R2 from the same estimator, both forcings on one pair of axes: orange additive,
+blue parametric. The grey dashed horizontal line at 0.3574 is the largest R2 seen anywhere among the 33,840 unforced
+runs of Simulation S1.
+Measured tracking slope over ω ∈ [1.8,2.2]: additive −0.031 at δ = 4 and −0.020 at δ = 30; parametric +0.498 at
+both δ = 1 and δ = 4. Mean R2 over the same window: additive 0.022 and 0.016; parametric 0.977 and 0.884.
+6 Cycle length under the phase-winding definition
+Simulation S5 — the δ sweep at ω = 2.5. ε = 0.05, σ = 1, ω = 2.5 fixed; δ from 0 to 4 in steps of 0.1
+(41 values); 12 realisations per δ; T = 8000, burn-in 2000. Run twice, at r = 0.5 and at r = 0. Cycle periods
+are histogrammed on 280 bins over [0,14] and stored, so the later figures need no re-simulation. Output:
+psweep_r05.npz , psweep_r00.npz . At this ω the reference periods are 2π/ω = 2.513, 4π/ω = 5.027,
+6π/ω = 7.540 and 2π = 6.283.
+11
+--- PAGE 12 ---
+10 2
+10 1
+100
+density
+= 0.0
+ = 0.1
+ = 0.2
+ = 0.3
+ = 0.4
+ = 0.5
+ = 0.6
+10 2
+10 1
+100
+density
+= 0.7
+ = 0.8
+ = 0.9
+ = 1.0
+ = 1.1
+ = 1.2
+ = 1.3
+10 2
+10 1
+100
+density
+= 1.4
+ = 1.5
+ = 1.6
+ = 1.7
+ = 1.8
+ = 1.9
+ = 2.0
+10 2
+10 1
+100
+density
+= 2.1
+ = 2.2
+ = 2.3
+ = 2.4
+ = 2.5
+ = 2.6
+ = 2.7
+10 2
+10 1
+100
+density
+= 2.8
+ = 2.9
+ = 3.0
+ = 3.1
+ = 3.2
+ = 3.3
+ = 3.4
+0.0 2.5 5.0 7.5 10.0
+cycle period
+10 2
+10 1
+100
+density
+= 3.5
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.6
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.7
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.8
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.9
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 4.0
+Cycle-period distribution as  sweeps 0 to 4, additive forcing, = 2.5, r = 0.5
+(log density, so the small modes are visible)
+2 /   (drive)
+ 4 / = 2 × drive
+ 6 / = 3 × drive
+ 2   (free)
+F19 — cycle-period distribution as δ sweeps 0 → 4, r = 0.5. Forty-one small panels, one per value of δ, reading left
+to right and top to bottom from δ = 0 to δ = 4; the value of δ is printed in the top right of each panel. In each panel the
+horizontal axis is the cycle period from 0 to 11 and the vertical axis is probability density on a logarithmic scale from
+2 × 10−3 to 4, chosen so that small secondary modes remain visible. The blue filled area is the measured distribution.
+The four dashed vertical lines are, in the colours given in the legend below the grid: green 2π/ω, the drive period; red
+4π/ω, twice the drive period; purple 6π/ω, three times the drive period; black 2π, the free period.
+12
+--- PAGE 13 ---
+10 2
+10 1
+100
+density
+= 0.0
+ = 0.1
+ = 0.2
+ = 0.3
+ = 0.4
+ = 0.5
+ = 0.6
+10 2
+10 1
+100
+density
+= 0.7
+ = 0.8
+ = 0.9
+ = 1.0
+ = 1.1
+ = 1.2
+ = 1.3
+10 2
+10 1
+100
+density
+= 1.4
+ = 1.5
+ = 1.6
+ = 1.7
+ = 1.8
+ = 1.9
+ = 2.0
+10 2
+10 1
+100
+density
+= 2.1
+ = 2.2
+ = 2.3
+ = 2.4
+ = 2.5
+ = 2.6
+ = 2.7
+10 2
+10 1
+100
+density
+= 2.8
+ = 2.9
+ = 3.0
+ = 3.1
+ = 3.2
+ = 3.3
+ = 3.4
+0.0 2.5 5.0 7.5 10.0
+cycle period
+10 2
+10 1
+100
+density
+= 3.5
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.6
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.7
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.8
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 3.9
+0.0 2.5 5.0 7.5 10.0
+cycle period
+= 4.0
+Cycle-period distribution as  sweeps 0 to 4, additive forcing, = 2.5, r = 0   (exactly linear)
+(log density, so the small modes are visible)
+2 /   (drive)
+ 4 / = 2 × drive
+ 6 / = 3 × drive
+ 2   (free)
+F19b — the same sweep at r = 0, the exactly linear control. Identical layout, axes, scales and reference lines to F19;
+the only change is r = 0, for which the system is exactly linear.
+0.0 2.5 5.0 7.5 10.0
+cycle period
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+forcing amplitude 
+(a)  
+0 5 10
+cycle period
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+(b)  
+0 1 2 3 4
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+0.35
+0.40
+fraction of cycles within ±4%
+(c)  
+drive 2 /
+4 /
+6 /
+free 2
+10 2
+10 1
+100
+density
+F19c — the same data as maps and as band fractions. (a) and (b): the whole sweep as a single map, for r = 0.5 and
+r = 0 respectively. Horizontal axis: cycle period, 0 to 11. Vertical axis: forcing amplitude δ, 0 to 4. Colour: probability
+density on a logarithmic scale shared by both panels, 3 × 10−3 to 2. Each horizontal row of a map is one panel of F19
+laid flat. The four vertical dashed lines are the same reference periods as in F19. (c) The fraction of all measured cycles
+falling within ±4% of each reference period, plotted against δ. Colours match the reference lines: green 2π/ω, red
+4π/ω, purple 6π/ω, black 2π. Solid curves r = 0.5, dashed curves r = 0.
+13
+--- PAGE 14 ---
+Simulation S6 — the two-tone null. A pure superposition X(t) = sin(ω0t + φ ) +Bsin(ωt) with ω0 = 1,
+ω = 2.5, random phase φ, 40 realisations, sampled at ∆t = 0.2 over t ∈ [0,40000 ]. The amplitude ratio
+B is set to the linear-response value at δ = 4, giving B/A = 0.76. This object has no dynamics at all: its
+cycle-period distribution is pure two-tone geometry, measured with the same phase-winding routine as the
+simulations.
+0 2 4 6 8 10
+cycle period
+10 2
+10 1
+100
+density
+(a)  
+r = 0.5
+r = 0 (exactly linear)
+0 2 4 6 8 10
+cycle period
+10 2
+10 1
+100
+(b)  
+0 1 2 3 4
+0.0
+0.1
+0.2
+0.3
+0.4
+fraction of cycles within ±4%
+(c)  
+2 /
+4 /
+6 /
+2
+2 /
+ 4 /
+ 6 /
+ 2
+F20 — simulation against the two-tone null. (a) Cycle-period distribution at δ = 4 from Simulation S5. Horizontal
+axis cycle period 0 to 11; vertical axis density, logarithmic, 2 × 10−3 to 4. Blue solid r = 0.5; orange dashed r = 0. (b)
+The same axes and scales, for the two-tone null of Simulation S6 at B/A = 0.76. (c) Fraction of cycles within ±4% of
+each reference period against δ, solid r = 0.5 and dashed r = 0, as in F19c(c). In all three panels the vertical dashed
+reference lines are green 2π/ω, red 4π/ω, purple 6π/ω, black 2π.
+Simulation S7 — modes at the QBO-analogue frequency. ω = 2.3333, chosen because the free period
+then contains 2.333 drive periods, the same ratio as a 28-month cycle to an annual one. ε = 0.05, σ = 1;
+δ ∈ {0,1,2,4,8,12}; r ∈ {0.5,0}; 24 realisations; T = 12000, burn-in 3000. Cycle lengths are converted
+to N and the modes of the distribution are located by kernel density estimation (bandwidth factor 0.035)
+followed by peak detection with a prominence threshold of 2–3% of the maximum. Output: modes.npz .
+0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0
+N = cycle length / drive period
+0
+1
+2
+3density
+(a)  
+= 0
+= 1
+= 2
+= 4
+= 8
+= 12
+2 4 6 8 10 12
+1
+2
+3
+4
+mode position in N
+(b)  
+r = 0.5
+r = 0
+Cycle length in drive periods, N = Tcycle/Tdrive, phase-winding definition.
+Red dashed: integers 1, 2, 3.  Black dotted: N = = 2.333, the unforced value.
+F21 — cycle length in drive periods at ω = 2.333. (a) Kernel density estimates of N = Tcycle/Tdrive at r = 0.5.
+Horizontal axis N from 0.4 to 4.2; vertical axis density. One curve per forcing strength, from grey δ = 0 through to
+orange δ = 12 as given in the legend. Red dashed vertical lines mark the integersN = 1,2,3; the black dotted line marks
+N = ω = 2.333, the value the unforced system takes exactly. (b) The positions of every detected mode, plotted against
+δ. Horizontal axis δ; vertical axis mode position in N, same range as (a). Blue circles r = 0.5, orange squares r = 0.
+The same red dashed integer lines and black dotted N = ω line are drawn horizontally.
+Measured mode weights within ±0.04 of each target, at r = 0.5: at δ = 0, 0.28% at N = 1, 18.1% at N = 2, 2.5% at
+N = 3 and 47.7% at N = ω; at δ = 2, 30.3%, 31.6%, 5.1% and 9.6%; at δ = 4, 53.3%, 21.2%, 2.7% and 3.8%.
+Simulation S8 — every mode against ω. ε = 0.05, σ = 1, r = 0.5; ω from 1.90 to 3.30 in steps of 0.10
+(15 values); δ ∈ {1,2,4}; 12 realisations per cell; T = 6000, burn-in 1500. Modes are found as in S7 with
+14
+--- PAGE 15 ---
+a prominence threshold of 5%. Output: allpeaks.npz . The same run was repeated at r = 0 for δ ∈ {2,4}
+(allpeaks_r0.npz ).
+2.00 2.25 2.50 2.75 3.00 3.25
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+mode position, N
+(a)  
+N =  (free)
+2.00 2.25 2.50 2.75 3.00 3.25
+(b)  
+2.00 2.25 2.50 2.75 3.00 3.25
+(c)  
+Every detected mode of the cycle-length distribution, additive forcing.  Marker size = relative height.
+F22 — every detected mode of the cycle-length distribution, phase-winding definition. Three panels, δ = 1, 2, 4
+left to right. Horizontal axis: forcing frequency ω, 1.9 to 3.3. Vertical axis: the position in N of a detected mode. Every
+dot is one mode of one distribution: for a given ω the cycle-length distribution is estimated, its local maxima are found,
+and one dot is plotted at each maximum. A column of dots at one ω therefore shows all the modes that distribution has,
+not a scatter of individual cycles. The area of a dot is proportional to the height of that mode relative to the tallest mode
+in the same column, so small dots are minor modes and large dots are dominant ones. Red dashed horizontal lines: the
+integers N = 1,2,3. Black dotted diagonal: N = ω, the value the unforced system takes.
+7 Cycle length under the zero-crossing definitions
+7.1 The two counting rules
+An upward zero crossing of X is located by linear interpolation between the two samples that bracket the sign
+change. The raw rule counts every one. The hysteresis rule adds a Schmitt trigger: after an accepted crossing,
+the signal must fall below −hth before another upward crossing can be accepted, with hth = 0.25rms (X)
+computed from the run itself. Small wiggles that carry X back and forth across zero without a full excursion
+are therefore counted by the raw rule and discarded by the hysteresis rule.
+15
+--- PAGE 16 ---
+3
+2
+1
+0
+1
+2
+3
+X(t)
+raw: 14 crossings  13 cycles in this window
+counted crossing
+2310 2315 2320 2325 2330 2335 2340 2345 2350 2355
+time t
+3
+2
+1
+0
+1
+2
+3
+X(t)
+h  (arming level)
+hysteresis: 7 crossings  6 cycles in this window
+crossing rejected (never went below h)
+The same trajectory read two ways.  = 2.333, = 2, h = 0.25rms(X) = 0.32.
+F23 — the same trajectory read by the two rules. Both panels show the identical segment of one run, ω = 2.333,
+δ = 2, over t ∈ [2310,2355]. Horizontal axis time; vertical axis X(t), blue. Top: the raw rule. Open circles on the zero
+line: every counted crossing. Grey double-headed arrows beneath the trace: the resulting cycles, one arrow per cycle.
+Bottom: the hysteresis rule. The orange shaded band between 0 and −hth and the orange dashed line at −hth show the
+arming level the signal must pass below to re-arm the trigger. Open circles: crossings that were accepted. Red crosses:
+crossings that the raw rule counted and this rule rejected because X never went below −hth since the previous accepted
+crossing. Each panel title gives the number of crossings and the number of cycles in the window.
+Measured in this window: hth = 0.55; the raw rule finds 14 crossings, the hysteresis rule accepts 7 and rejects 7.
+7.2 The fine sweep
+Simulation S9 — the fine (ω, δ ) zero-crossing sweep. The grid is
+ω = 1.00, 1.02, . . . , 4.00 (151 values), δ = 0.00, 0.05, . . . , 4.00 (81 values),
+giving 12,231 cells, each run with three seeds {11,22,33} and pooled. Settings ε = 0.05, σ = 1, T = 4000,
+∆t = 0.0025, burn-in 1000, sample interval 0.2, 400 configurations per integrator call. The whole grid is
+run twice, at r = 0.5 and at r = 0. For every cell, and separately for each of the two counting rules, the full
+histogram of N is stored on 240 bins over [0,6] together with the median and the cycle count, so every figure
+below is made from stored histograms without re-simulating. Output: zc_r05.npz , zc_r00.npz .
+Sample size and validation. The median cell contains 1,480 cycles and the smallest contains 1,342. At
+δ = 0 the measured medianN should equal ω exactly; the measured values are1.5017, 2.0023, 2.5029, 3.0034
+and 3.5040 at ω = 1.5, 2.0, 2.5, 3.0, 3.5, an offset of +0.0017 to +0.0040 attributable to finite sampling of
+the crossing times. The two values of r give median N surfaces whose typical absolute difference is 0.030.
+16
+--- PAGE 17 ---
+1 2 3 4
+0
+1
+2
+3
+4
+(a)  
+1.5 2.0 2.5
+3.0
+3.5
+1 2 3 4
+0
+1
+2
+3
+4
+(b)  
+1.5 2.0 2.5 3.0 3.5
+1.50
+1.25
+1.00
+0.75
+0.50
+0.25
+0.00
+N( ) N(0)
+(c)  
+r = 0.5, = 1
+r = 0.5, = 2
+r = 0.5, = 3
+r = 0.5, = 4
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+1.0
+0.5
+0.0
+0.5
+1.0
+Cycle length from zero crossings of X (hysteresis), N = Tcycle/Tdrive.  12,231 cells, 3 seeds each.
+F24 — the median cycle length over the (ω, δ ) plane. All three panels use the hysteresis rule at r = 0.5. (a) Map
+of the median N. Horizontal axis ω from 1 to 4; vertical axis δ from 0 to 4; colour median N from 0.9 (pale) to 4.0
+(dark). Red contours are drawn and labelled at median N = 1.5, 2, 2.5, 3, 3.5. (b) The same plane showing the change
+caused by the forcing, N(δ ) − N(0), so each column is measured against its own unforced value at the same ω. Colour
+is diverging and symmetric about zero, from −1 to +1; black dashed vertical lines mark ω = 2 and ω = 3. (c) Cuts
+through panel (b) at four forcing strengths. Horizontal axis ω from 1.4 to 3.9; vertical axis N(δ ) − N(0). Solid curves
+r = 0.5, dashed curves r = 0, one colour per δ ∈ {1,2,3,4}; the horizontal line is zero and red dashed verticals mark
+ω = 2,3.
+Measured: the fraction of ω values at which N(δ ) − N(0) is negative is 57.3%, 75.0%, 87.1%, 94.4% at δ =
+1,2,3,4 for r = 0.5, and 64.5%, 86.3%, 96.8%, 100% for r = 0. The corresponding means of N(δ ) − N(0) are
+−0.013, −0.082, −0.196, −0.358 at r = 0.5 and −0.038, −0.196, −0.441, −0.740 at r = 0.
+1 2 3 4
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+(a)  
+1
+2
+3
+1 2 3 4
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+(b)  
+1
+2
+3
+1 2 3 4
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+(c)  
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+median N
+0.00
+0.25
+0.50
+0.75
+1.00
+1.25
+1.50
+F24b — the same surface under both counting rules, with its gradient. (a) Median N over the (ω, δ ) plane, hysteresis
+rule. (b) The same, raw rule. Both use the identical colour scale, 0.9 to 4.0, with red contours labelled at median
+N = 1,2,3. (c) The magnitude of the slope of the surface in (a) along the ω direction, |∂N/∂ ω|, computed by finite
+differences on the ω grid. Colour runs from 0 to 1.6. On this panel a value of 0 means the median cycle length does not
+change as ω is varied at that point, and a value of 1 means it changes as fast as ω itself.
+Measured: the median- N = 2 contour sits at ω = 1.998 at δ = 0 and moves to ω = 2.014, 2.083, 2.162, 2.318 at
+δ = 1,2,3,4.
+17
+--- PAGE 18 ---
+1.5 2.0 2.5 3.0 3.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+median N
+(a)  
+= 0
+= 1
+= 2
+= 3
+= 4
+N =
+1.5 2.0 2.5 3.0 3.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+median N
+(b)  
+0 1 2 3 4
+0.00
+0.05
+0.10
+0.15
+0.20
+fraction of  with | N/ | < 0.25
+(c)  
+hysteresis
+raw
+F25 — median N against ω, and how much of the range is flat. (a) Median N against ω at five forcing strengths,
+hysteresis rule. Horizontal axis ω from 1.4 to 3.9; vertical axis medianN from 0.8 to 4.0. One curve per δ ∈ {0,1,2,3,4},
+grey to blue as given in the legend. The black dotted diagonal is N = ω, the unforced relation. Red dashed horizontals
+mark the integers 1,2,3. (b) The identical plot for the raw rule; same axes, same curves, same guides. (c) Plateau
+coverage: the fraction of ω ∈ (1.5,3.8) at which |∂N/∂ ω| < 0.25, plotted against δ. Blue hysteresis, orange raw. A
+value of 0 means the curve in (a) or (b) is nowhere flatter than a quarter of the unforced slope; a value of 1 would mean
+it is flat everywhere.
+Measured plateau coverage at r = 0.5, hysteresis: 0 at δ = 0,1,2; 8.1% at δ = 3; 19.4% at δ = 4.
+7.3 Occupancy of the integer bands
+For each cell, the fraction of measured cycles with N inside [0.9,1.1], [1.9,2.1] or [2.9,3.1] is computed
+directly from the stored histogram. These are the “integer bands”.
+0
+1
+2
+3
+4
+N [0.9, 1.1]   hysteresis
+ N [1.9, 2.1]   hysteresis
+ N [2.9, 3.1]   hysteresis
+1 2 3 4
+0
+1
+2
+3
+4
+N [0.9, 1.1]   raw
+1 2 3 4
+N [1.9, 2.1]   raw
+1 2 3 4
+N [2.9, 3.1]   raw
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+fraction of cycles in the band
+Occupancy of the integer bands over the ( , ) plane.  Dashed line: = N, where the unforced system already sits in the band.
+F27 — occupancy of the integer bands over the (ω, δ ) plane. Six maps. The top row uses the hysteresis rule, the
+bottom row the raw rule; columns are the bands N ∈ [0.9,1.1], [1.9,2.1] and [2.9,3.1] from left to right. In every map
+the horizontal axis is ω from 1 to 4, the vertical axis is δ from 0 to 4, and the colour is the fraction of that cell’s cycles
+lying inside the band, on a scale shared by all six panels from 0 to 0.55. The red dashed vertical line in each panel is at
+ω equal to the band’s integer, which is theω at which the unforced system already has N inside that band.
+Measured at δ = 4 (hysteresis), the largest occupancy of each band and the value at the same ω when δ = 0: band 1,
+0.933 at ω = 1.00 against 0.709; band 2, 0.321 at ω = 1.96 against 0.415; band 3, 0.364 at ω = 3.02 against 0.301.
+18
+--- PAGE 19 ---
+1 2 3 4
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+N [0.9, 1.1]
+1 2 3 4
+N [1.9, 2.1]
+1 2 3 4
+N [2.9, 3.1]
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+occupancy  its value at = 0
+Enhancement of integer-band occupancy relative to the unforced system (hysteresis)
+F26 — the same occupancy measured against its own unforced value. Three maps, one per band, hysteresis rule.
+Axes as in F27: horizontal ω from 1 to 4, vertical δ from 0 to 4. The quantity plotted is the band occupancy minus the
+occupancy of the same band at δ = 0 and the same ω, so each column is referenced to its own unforced value and the
+whole δ = 0 row is zero by construction. The colour scale is diverging and symmetric, −0.35 to +0.35: one colour for
+occupancy above the unforced value, the other for below, and the neutral midpoint for no change. The black dashed
+vertical line marks ω equal to the band’s integer.
+7.4 Shape of the distribution at a fixed frequency
+1 2 3 4
+N = cycle length / drive period
+0.0
+0.5
+1.0
+1.5
+2.0density
+(a)  
+measured
+smooth envelope
+1 2 3 4
+N = cycle length / drive period
+0.0
+0.5
+1.0
+1.5
+2.0
+(b)  
+1 2 3 4
+N = cycle length / drive period
+0.0
+0.5
+1.0
+1.5
+2.0
+(c)  
+Cycle-length distribution at = 2.333, with a wide-bandwidth smooth envelope.
+A "lump" is the measured curve rising ABOVE the dashed envelope at an integer.
+F28 — the distribution of N at ω = 2.333 against a smooth envelope. Three panels, δ = 0, 2, 4 left to right, hysteresis
+rule, r = 0.5, taken from the stored histograms of Simulation S9. Horizontal axis: N from 0.4 to 4.2. Vertical axis:
+probability density, linear, 0 to 2.2. The blue shaded area with its thin blue outline is the measured distribution. The
+black dashed curve is the same distribution convolved with a wide Gaussian kernel (full width at half maximum 0.40 in
+N), which removes any structure narrower than that width while preserving the broad shape — it is the distribution the
+data would have if it had no narrow features. Red dotted vertical lines mark the integers N = 1,2,3. Reading the panel
+means comparing the solid curve to the dashed one at those three positions: where the measured density rises above its
+own smooth envelope at an integer, there is narrow excess mass there; where it sits on or below the envelope, there is
+none.
+19
+--- PAGE 20 ---
+1
+2
+3
+4
+mode position, N
+slope +0.96
+hysteresis,  = 1
+N =  (free)
+fit to the N 2 branch
+slope +0.52
+hysteresis,  = 2
+slope +0.33
+hysteresis,  = 4
+1.0 1.5 2.0 2.5 3.0 3.5 4.0
+1
+2
+3
+4
+mode position, N
+slope +0.96
+raw,  = 1
+1.0 1.5 2.0 2.5 3.0 3.5 4.0
+slope +0.54
+raw,  = 2
+1.0 1.5 2.0 2.5 3.0 3.5 4.0
+slope +0.38
+raw,  = 4
+Every detected mode of the cycle-length distribution, additive forcing, zero-crossing measure.
+Marker size = height relative to the tallest mode in that column.   step 0.02.
+F29 — every detected mode, zero-crossing definition. The zero-crossing counterpart of F22, built from the stored
+histograms of Simulation S9, so the ω grid has step 0.02 (151 values) rather than the step 0.10 (15 values) of the
+phase-winding version, and branches appear as near-continuous curves rather than isolated columns. Six panels: the
+top row is the hysteresis rule and the bottom row the raw rule; columns are δ = 1, 2, 4. Horizontal axis ω from 1 to 4;
+vertical axis mode position in N, 0.4 to 4.3. As in F22, every dot is one mode of one cell’s distribution, and the marker
+area is proportional to that mode’s height relative to the tallest mode in the same column. Black dotted diagonal: N = ω.
+Red dashed horizontals: the integers 1,2,3. The thick orange segment in each panel is a straight-line fit to the dots
+belonging to the branch that begins near N = 2, restricted to ω ∈ [1.9,2.6] and N ∈ (1.6,2.6); its slope is printed in the
+corner of the panel.
+Measured slope of the N ≈ 2 branch: hysteresis +0.959, +0.523, +0.328 at δ = 1,2,4; raw +0.961, +0.540, +0.376.
+For the branch near N = 1: hysteresis slope +0.424, −0.081, −0.040 with mean N of 1.090, 1.004, 0.988; raw slope
+−0.087, −0.051, −0.031 with mean N of 1.015, 0.994, 1.001. Total dots per panel range from 218 to 412, with a
+median of 1–3 modes per ω column.
+7.5 Sensitivity of the branch to the drive
+Derived quantity S10. For every δ on the sweep grid (0 to 4 in steps of 0.05, 81 values), the slope dN/dω
+of the branch near N = 2 is estimated exactly as in F29 and recorded, for all four combinations of r ∈ {0.5,0}
+and the two counting rules. Output: slope_vs_delta.npz . This is a re-analysis of the stored histograms of
+Simulation S9; no new simulation was run.
+20
+--- PAGE 21 ---
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+branch slope  dN/d
+follows the free value
+pinned at the integer
+(a)  
+r = 0.5, hysteresis
+r = 0.5, raw
+r = 0, hysteresis
+r = 0, raw
+0.75 1.00 1.25 1.50 1.75 2.00 2.25 2.50
+0.4
+0.6
+0.8
+1.0branch slope
+knee
+(b)  
+Sensitivity of the observed cycle length to the drive, against forcing amplitude.
+Slope 1 = the forcing does nothing;  slope 0 = the cycle length is pinned.
+F30 — branch slope against forcing amplitude. (a) The whole range. Horizontal axis δ from 0 to 4; vertical axis the
+fitted branch slope dN/dω, from −0.05 to 1.1. Four curves, one per combination of r and counting rule, as given in the
+legend. Two horizontal guides label the ends of the scale: a slope of 1, at which the measured cycle length moves with
+ω exactly as the unforced system’s does, and a slope of0, at which the measured cycle length does not move with ω at
+all. (b) The same four curves with markers on every grid point, zoomed to δ ∈ [0.6,2.6] and slope ∈ [0.35,1.08]. The
+shaded vertical band spans δ ∈ [1.2,1.9] and is labelled “knee”.
+Measured: the plateau value at small δ is 0.9555, 0.9538, 0.9568, 0.9559 for the four curves. The departure from that
+plateau begins at δ = 1.50 for r = 0.5 and δ = 1.20 for r = 0. The slope at δ = 4 is 0.328 and 0.376 (r = 0.5, hysteresis
+and raw) and 0.314 and 0.353 (r = 0). The rate of fall d(slope)/dδ in three windows is: over δ ∈ [0.2,1.1], −0.004,
+−0.010, −0.093, −0.089; over δ ∈ [1.4,2.0], −0.605, −0.620, −0.480, −0.369; over δ ∈ [2.2,4.0], −0.078, −0.074,
+−0.058, −0.062.
+21
+--- PAGE 22 ---
+8 Index of simulations
+ID What was run Grid Runs Output
+V1 Integrator validation, unforced and
+short forced runs
+ε=0.05, σ =1, r=0.5; T =20000 unforced,
+T =600 forced at ω=2.5, δ ∈ {0,4,30}
+4 F01
+S1 Blanket additive sweep of the reduced
+system
+ω: 141 values 0.5–4.0 step 0.025;
+δ ∈ {0,0.5,1.5,4,12,30};
+r ∈ {0,0.25,0.5,0.9,1.4}; σ ∈ {0.5,1,2};
+ε ∈ {0.02,0.05,0.1,0.2}; 4 seeds; T =3000,
+burn 1000
+203,040
+(33,840 null;
+1,440 cells)
+sweep_
+all.csv ;
+F02–F09
+S2 Three-dimensional system, figure scan ε=0.2, σ =1; τ ∈ {0.05,0.2,0.5,1,2,5};
+δ ∈ {0,4,30}; ω: 71 values 0.5–4.0 step 0.05;
+T =6000, burn 2000
+1,278 F10
+S3 Three-dimensional system, tabulated
+scan
+ε ∈ {0.2,0.5}; τ ∈ {0.5,1,2,5};
+δ ∈ {0,1,4,12,30}; ω: 61 values 1.0–4.0 step
+0.05; 4 seeds
+9,760 scan3d_
+full.csv
+S4 Detector calibration; additive plus a
+parametric reference
+ε=0.05, σ =1, r=0.5; ω: 71 values 0.5–4.0 step
+0.05; additive δ ∈ {0,4,30}, parametric
+δ ∈ {0,1,4}; T =6000, burn 2000
+426 F10b
+S5 δ sweep of the cycle-period
+distribution at fixed ω
+ω=2.5; δ: 41 values 0–4 step 0.1; r ∈ {0.5,0};
+12 realisations; T =8000, burn 2000
+984 psweep_
+r05/r00.npz ;
+F19, F19b,
+F19c
+S6 Two-tone superposition null (no
+dynamics)
+ω0=1, ω=2.5, B/A=0.76; 40 random phases;
+t ≤ 40000, ∆t=0.2
+40 F20
+S7 Modes of the N distribution at the
+QBO-analogue frequency
+ω=2.3333; δ ∈ {0,1,2,4,8,12}; r ∈ {0.5,0};
+24 realisations; T =12000, burn 3000
+288 modes.npz ;
+F21
+S8 Every mode against ω, phase-winding
+definition
+ω: 15 values 1.90–3.30 step 0.10; δ ∈ {1,2,4}
+at r=0.5 and δ ∈ {2,4} at r=0; 12 realisations;
+T =6000, burn 1500
+900 allpeaks -
+.npz ,
+allpeaks -
+_r0.npz ; F22
+S9 Fine (ω, δ ) zero-crossing sweep, both
+counting rules
+ω: 151 values 1.00–4.00 step 0.02; δ: 81 values
+0–4 step 0.05; 3 seeds; r ∈ {0.5,0}; ε=0.05,
+σ =1; T =4000, burn 1000
+12,231 cells ×
+3 seeds × 2
+values of r
+zc_r05.npz ,
+zc_r00.npz ;
+F23–F29
+S10 Branch slope against δ (re-analysis of
+S9, no new simulation)
+δ: 81 values 0–4 step 0.05; r ∈ {0.5,0}; both
+counting rules
+— slope_vs_
+delta.npz ;
+F30
+9 Index of figures
+Fig. Source What it shows Axes
+F01 V1 Integrator validation, three panels h vs density; period vs density; t
+vs X
+F02 S1 Response spectrum maps at four δ ω vs response frequency, colour
+power
+F03 S1 The same over a 5 × 5 grid of (δ ,r) as F02
+F06 S1 Welch spectra of 36 individual runs response frequency vs normalised
+power
+F04 S1 Tracking slope and peak travel ω vs response frequency; slope
+vs count; travel vs count
+F05 S1 Linear response, dependence on r, spectrum of
+h
+ω vs amplitude; r vs max slope;
+δ vs band power
+F07 — Four sample paths and their energies t vs X; t vs h
+22
+--- PAGE 23 ---
+Fig. Source What it shows Axes
+F08 S1 Six distribution panels see caption
+F09 S1 Phase coherence, map, null comparison, trend ω–δ map; R2 vs density; δ vs Rn
+F10 S2 Three-dimensional system, three rows × six τ ω vs peak, R2, λ
+F10b S4 Detector calibration, additive and parametric ω vs response frequency; ω vs R2
+F19 S5 41 period distributions, r=0.5 period vs density (log)
+F19b S5 The same at r=0 as F19
+F19c S5 The sweep as maps and band fractions period vs δ; δ vs fraction
+F20 S5, S6 Simulation against the two-tone null period vs density; δ vs fraction
+F21 S7 N at ω=2.333: densities and mode positions N vs density; δ vs mode position
+F22 S8 Every mode against ω, phase winding ω vs mode position in N
+F23 S9 The two counting rules on one trajectory t vs X
+F24 S9 Median N, its change, and cuts ω–δ maps; ω vs ∆N
+F24b S9 Median N both rules, plus |∂N/∂ ω| ω–δ maps
+F25 S9 Median N vs ω; plateau coverage ω vs N; δ vs fraction
+F27 S9 Integer-band occupancy, both rules ω–δ maps, colour occupancy
+F26 S9 Occupancy minus its unforced value ω–δ maps, diverging colour
+F28 S9 Distribution of N against a smooth envelope N vs density
+F29 S9 Every mode against ω, zero crossings ω vs mode position in N
+F30 S10 Branch slope against δ δ vs dN/dω
+10 Index of measured values
+Quantity Measured value
+Simulation S1 — the blanket sweep
+Total runs / null runs / parameter cells / ω values 203,040 / 33,840 / 1,440 / 141
+Tracking slope, 2:1 window: mean, maximum, cells +0.0023, +0.2017, 1,200
+Tracking slope, 3:1 window: mean, maximum −0.0005, +0.1084
+Cells reaching half the 2:1 or 3:1 slope 0 and 0
+Total travel of the peak: median, maximum 0 .0691, 0.3236
+Maximum tracking slope by r (0/0.25/0.5/0.9/1.4) 4 .9×10−16 / 0.1096 / 0.0979 / 0.2017 /
+0.0520
+Power of h at 2ω at δ = 0 and δ = 30 0 .25% and 31.7%
+Forced runs exceeding the ω-matched null in R2, R3 0.47%, 0.74%
+Median R2: forced, null 0 .0092, 0.0142
+Largest R2 anywhere in the null 0 .3574
+Bimodality coefficient > 5/9: forced, forced at r = 0, null 44 .5%, 31.3%, 1.25%
+Runs within 1% of 4π/ω: forced, null 1 .160%, 1.161%
+Simulation S3 — three-dimensional system
+Runs 9,760
+Simulation S4 — detector calibration
+Tracking slope on ω ∈ [1.8,2.2], additive δ = 4, 30 −0.0314, −0.0204
+Tracking slope, parametric reference δ = 1, 4 +0.4979, +0.4979
+23
+--- PAGE 24 ---
+Quantity Measured value
+Mean R2 on the same window, additive δ = 4, 30 0 .0219, 0.0164
+Mean R2, parametric reference δ = 1, 4 0 .9765, 0.8841
+Simulation S7 — ω = 2.333, phase winding, r = 0.5
+Weight within ±0.04 of N = 1,2,3, ω at δ = 0 0 .28%, 18.07%, 2.53%, 47.68%
+The same at δ = 2 30 .27%, 31.65%, 5.06%, 9.58%
+The same at δ = 4 53 .29%, 21.17%, 2.65%, 3.80%
+Simulation S9 — the fine zero-crossing sweep
+Cells / ω values / δ values / seeds 12,231 / 151 / 81 / 3
+Cycles per cell: median, minimum 1,480, 1,342
+Validation at δ = 0: median N at ω = 1.5–3.5 1 .5017, 2.0023, 2.5029, 3.0034, 3.5040
+Typical |N(r=0.5) − N(r=0)| 0.030
+Fraction of ω with N(δ ) < N(0), r = 0.5, δ = 1–4 57 .3%, 75.0%, 87.1%, 94.4%
+The same at r = 0 64 .5%, 86.3%, 96.8%, 100%
+Mean N(δ ) − N(0), r = 0.5, δ = 1–4 −0.013, −0.082, −0.196, −0.358
+The same at r = 0 −0.038, −0.196, −0.441, −0.740
+Plateau coverage (|∂N/∂ ω| < 0.25), δ = 0–4 0, 0, 0, 8 .1%, 19.4%
+Position in ω of the median-N = 2 contour, δ = 0–4 1 .998, 2.014, 2.083, 2.162, 2.318
+Largest band-1 occupancy at δ = 4 (and at δ = 0, same ω) 0 .933 at ω = 1.00 (0.709)
+Largest band-2 occupancy at δ = 4 (and at δ = 0) 0 .321 at ω = 1.96 (0.415)
+Largest band-3 occupancy at δ = 4 (and at δ = 0) 0 .364 at ω = 3.02 (0.301)
+Slope of the N ≈ 2 branch, hysteresis, δ = 1,2,4 +0.959, +0.523, +0.328
+The same, raw +0.961, +0.540, +0.376
+Mean N on the N ≈ 1 branch, hysteresis, δ = 1,2,4 1 .090, 1.004, 0.988
+Raw vs hysteresis crossings in the window of F23 14 vs 7, 7 rejected; hth = 0.55
+Derived quantity S10 — branch slope against δ
+Plateau slope at small δ (four estimators) 0 .9555, 0.9538, 0.9568, 0.9559
+Onset of departure from the plateau, r = 0.5 / r = 0 δ = 1.50 / δ = 1.20
+Slope at δ = 4 (four estimators) 0 .328, 0.376, 0.314, 0.353
+Rate of fall over δ ∈ [0.2,1.1] −0.004, −0.010, −0.093, −0.089
+Rate of fall over δ ∈ [1.4,2.0] −0.605, −0.620, −0.480, −0.369
+Rate of fall over δ ∈ [2.2,4.0] −0.078, −0.074, −0.058, −0.062
+In the four-estimator rows the order is: r = 0.5 hysteresis, r = 0.5 raw, r = 0 hysteresis, r = 0 raw.
+24

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="590" height="480" preserveAspectRatio="xMinYMin meet" viewBox="0 0 590 480" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>02 integer interval probabilities</title>
+	<desc>Computed simulation results with confidence intervals across independent seeds. See captions.md for definitions and scope.</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="590" height="480"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-480)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="590" height="480" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<g transform=" matrix(1,0,0,1,20,20)">
+				<g transform="">
+					<rect x="0" y="0" width="550" height="440" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="0" y="418" style="font-family: Segoe UI Semibold; font-size: 16px;fill: rgb(9%,14%,21%); stroke:none;" transform="translate(0,836) scale(1,-1)">B  Near-integer intervals become more common</text>
+					<text x="0" y="396" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,792) scale(1,-1)">Stronger forcing increasingly favours one-period intervals.</text>
+					<text x="55" y="371" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,742) scale(1,-1)">Fraction of intervals (%)</text>
+					<text x="241.206298828125" y="30" style="font-family: Segoe UI; font-size: 11px;fill: rgb(9%,14%,21%); stroke:none;" transform="translate(0,60) scale(1,-1)">Forcing amplitude δ</text>
+					<text x="0" y="7" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,14) scale(1,-1)">r = 0.5; ω = 7/3. Bands: |N − n| &lt; 0.1; 95% CI, 16 seeds.</text>
+					<path d="M 35,62 L 59,62 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.8;"/>
+					<text x="65" y="59" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,118) scale(1,-1)">Any integer</text>
+					<path d="M 178,62 L 202,62 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.8;"/>
+					<text x="208" y="59" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,118) scale(1,-1)">N ≈ 1</text>
+					<path d="M 302,62 L 326,62 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.8;"/>
+					<text x="332" y="59" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,118) scale(1,-1)">N ≈ 2</text>
+					<path d="M 426,62 L 450,62 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.8;"/>
+					<text x="456" y="59" style="font-family: Segoe UI; font-size: 10px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,118) scale(1,-1)">N ≈ 3</text>
+					<g transform="">
+						<g transform="">
+							<g transform="">
+								<path d="M 55,100 L 525,100 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+							</g>
+							<g transform="">
+								<path d="M 55,100 L 55,97 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 172.5,100 L 172.5,97 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 290,100 L 290,97 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 407.5,100 L 407.5,97 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 525,100 L 525,97 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+							</g>
+							<g transform="">
+								<g transform=" matrix(1,0,0,1,55,92)">
+									<text x="-2.4257812500000004" y="-9.0" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-18) scale(1,-1)">0</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,172.5,92)">
+									<text x="-2.4257812500000004" y="-9.0" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-18) scale(1,-1)">1</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,290,92)">
+									<text x="-2.4257812500000004" y="-9.0" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-18) scale(1,-1)">2</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,407.5,92)">
+									<text x="-2.4257812500000004" y="-9.0" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-18) scale(1,-1)">3</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,525,92)">
+									<text x="-2.4257812500000004" y="-9.0" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-18) scale(1,-1)">4</text>
+								</g>
+							</g>
+						</g>
+						<g transform="">
+							<g transform="">
+								<path d="M 55,100 L 55,360 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+							</g>
+							<g transform="">
+								<path d="M 55,100 L 52,100 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 55,157.777778 L 52,157.777778 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 55,215.555556 L 52,215.555556 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 55,273.333333 L 52,273.333333 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+								<path d="M 55,331.111111 L 52,331.111111 Z" style="stroke: rgb(65%,69%,75%); stroke-linecap: butt; stroke-width: 0.6;"/>
+							</g>
+							<g transform="">
+								<g transform=" matrix(1,0,0,1,48,100)">
+									<text x="-4.851562500000001" y="-3.6000000000000005" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-7) scale(1,-1)">0</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,48,157.777778)">
+									<text x="-9.703125000000002" y="-3.6000000000000005" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-7) scale(1,-1)">10</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,48,215.555556)">
+									<text x="-9.703125000000002" y="-3.6000000000000005" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-7) scale(1,-1)">20</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,48,273.333333)">
+									<text x="-9.703125000000002" y="-3.6000000000000005" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-7) scale(1,-1)">30</text>
+								</g>
+								<g transform=" matrix(1,0,0,1,48,331.111111)">
+									<text x="-9.703125000000002" y="-3.6000000000000005" style="font-family: Segoe UI; font-size: 9px;fill: rgb(32%,38%,45%); stroke:none;" transform="translate(0,-7) scale(1,-1)">40</text>
+								</g>
+							</g>
+						</g>
+						<path d="M 172.5,100 L 172.5,360 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 290,100 L 290,360 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 407.5,100 L 407.5,360 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 525,100 L 525,360 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 55,157.777778 L 525,157.777778 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 55,215.555556 L 525,215.555556 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 55,273.333333 L 525,273.333333 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<path d="M 55,331.111111 L 525,331.111111 Z" style="stroke: rgb(86%,89%,92%); stroke-linecap: butt; stroke-width: 0.4;"/>
+						<g transform="">
+							<polyline points="55 162.5854, 172.5 197.0854, 231.25 226.8918, 290 253.1265, 407.5 292.3971, 525 317.6139" style="stroke: rgb(21%,25%,31%); stroke-linecap: round; stroke-width: 2.2; fill: None; fill-rule: evenodd;"/>
+							<polyline points="55 100, 172.5 105.9039, 231.25 118.6298, 290 138.6383, 407.5 183.752, 525 224.0401" style="stroke: rgb(83%,47%,11%); stroke-linecap: round; stroke-width: 1.5; fill: None; fill-rule: evenodd;"/>
+							<polyline points="55 151.6734, 172.5 174.5072, 231.25 194.2582, 290 202.8563, 407.5 202.6064, 525 190.0063" style="stroke: rgb(14%,46%,67%); stroke-linecap: round; stroke-width: 1.5; fill: None; fill-rule: evenodd;"/>
+							<polyline points="55 106.2854, 172.5 113.0215, 231.25 113.0532, 290 111.4924, 407.5 106.0387, 525 103.5674" style="stroke: rgb(57%,41%,65%); stroke-linecap: round; stroke-width: 1.5; fill: None; fill-rule: evenodd;"/>
+						</g>
+					</g>
+					<path d="M 55,157.095103 L 55,168.075652 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,157.095103 L 57.5,157.095103 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,168.075652 L 57.5,168.075652 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 172.5,189.959438 L 172.5,204.211337 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,189.959438 L 175,189.959438 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,204.211337 L 175,204.211337 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 231.25,218.697055 L 231.25,235.086625 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,218.697055 L 233.75,218.697055 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,235.086625 L 233.75,235.086625 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 290,243.984453 L 290,262.268481 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,243.984453 L 292.5,243.984453 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,262.268481 L 292.5,262.268481 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 407.5,283.754177 L 407.5,301.040052 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,283.754177 L 410,283.754177 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,301.040052 L 410,301.040052 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 525,309.464046 L 525,325.763683 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,309.464046 L 527.5,309.464046 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,325.763683 L 527.5,325.763683 Z" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 55,100 L 55,100 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,100 L 57.5,100 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,100 L 57.5,100 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 172.5,103.935005 L 172.5,107.872825 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,103.935005 L 175,103.935005 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,107.872825 L 175,107.872825 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 231.25,114.073013 L 231.25,123.186532 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,114.073013 L 233.75,114.073013 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,123.186532 L 233.75,123.186532 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 290,131.378959 L 290,145.897645 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,131.378959 L 292.5,131.378959 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,145.897645 L 292.5,145.897645 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 407.5,174.778913 L 407.5,192.725159 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,174.778913 L 410,174.778913 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,192.725159 L 410,192.725159 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 525,214.211939 L 525,233.868351 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,214.211939 L 527.5,214.211939 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,233.868351 L 527.5,233.868351 Z" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 55,147.048838 L 55,156.297955 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,147.048838 L 57.5,147.048838 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,156.297955 L 57.5,156.297955 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 172.5,169.468757 L 172.5,179.545728 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,169.468757 L 175,169.468757 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,179.545728 L 175,179.545728 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 231.25,187.587002 L 231.25,200.929367 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,187.587002 L 233.75,187.587002 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,200.929367 L 233.75,200.929367 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 290,196.239915 L 290,209.472693 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,196.239915 L 292.5,196.239915 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,209.472693 L 292.5,209.472693 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 407.5,196.600488 L 407.5,208.61235 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,196.600488 L 410,196.600488 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,208.61235 L 410,208.61235 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 525,184.536051 L 525,195.476594 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,184.536051 L 527.5,184.536051 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,195.476594 L 527.5,195.476594 Z" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 55,104.964096 L 55,107.606678 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,104.964096 L 57.5,104.964096 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 52.5,107.606678 L 57.5,107.606678 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 172.5,110.164278 L 172.5,115.878722 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,110.164278 L 175,110.164278 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 170,115.878722 L 175,115.878722 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 231.25,111.236734 L 231.25,114.869629 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,111.236734 L 233.75,111.236734 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 228.75,114.869629 L 233.75,114.869629 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 290,110.003959 L 290,112.980847 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,110.003959 L 292.5,110.003959 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 287.5,112.980847 L 292.5,112.980847 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 407.5,104.879226 L 407.5,107.198094 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,104.879226 L 410,104.879226 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 405,107.198094 L 410,107.198094 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 525,102.327922 L 525,104.806874 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,102.327922 L 527.5,102.327922 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<path d="M 522.5,104.806874 L 527.5,104.806874 Z" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 0.9;"/>
+					<circle cx="55.0" cy="162.58537757887996" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="172.5" cy="197.0853878399597" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="231.25" cy="226.89183995567183" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="290.0" cy="253.12646693430085" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="407.5" cy="292.39711446405295" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="525.0" cy="317.613864869396" r="2.8" style="stroke: rgb(21%,25%,31%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(21%,25%,31%); fill-rule: evenodd;"/>
+					<circle cx="55.0" cy="100.0" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="172.5" cy="105.90391530763237" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="231.25" cy="118.62977266798357" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="290.0" cy="138.63830192842855" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="407.5" cy="183.75203615213275" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="525.0" cy="224.04014480866152" r="2.8" style="stroke: rgb(83%,47%,11%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(83%,47%,11%); fill-rule: evenodd;"/>
+					<circle cx="55.0" cy="151.67339676670883" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="172.5" cy="174.50724258533228" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="231.25" cy="194.25818471428255" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="290.0" cy="202.8563038868083" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="407.5" cy="202.60641873358406" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="525.0" cy="190.00632217500907" r="2.8" style="stroke: rgb(14%,46%,67%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(14%,46%,67%); fill-rule: evenodd;"/>
+					<circle cx="55.0" cy="106.28538686062205" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+					<circle cx="172.5" cy="113.02150003641445" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+					<circle cx="231.25" cy="113.05318176478886" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+					<circle cx="290.0" cy="111.49240271635355" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+					<circle cx="407.5" cy="106.0386595783362" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+					<circle cx="525.0" cy="103.56739788572543" r="2.8" style="stroke: rgb(57%,41%,65%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(57%,41%,65%); fill-rule: evenodd;"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
